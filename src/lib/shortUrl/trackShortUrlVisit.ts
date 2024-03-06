@@ -1,21 +1,34 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Visit } from "@prisma/client";
 
 async function trackShortUrlVisit(
-  req: Request,
+  {
+    shortUrl: shortUrlString,
+    ...data
+  }: Partial<Omit<Visit, "id" | "createdAt" | "shortUrlId">> & {
+    shortUrl: string;
+  },
   { prisma }: { prisma: PrismaClient }
 ) {
-  const result = await prisma.shortUrl.findUnique({
-    select: { longUrl: true },
-    where: { shortUrl: req.url },
+  const shortUrl = await prisma.shortUrl.findUnique({
+    select: { longUrl: true, id: true },
+    where: { shortUrl: shortUrlString },
   });
 
-  if (!result) {
-    return Response.redirect("/404");
+  if (!shortUrl) {
+    return null;
   }
 
-  const lol = [...req.headers.entries()];
-  console.log(lol);
-  return Response.redirect(result.longUrl, 302);
+  prisma.visit.create({
+    data: {
+      device: data.device || "unknown",
+      browser: data.browser || "unknown",
+      country: data.country || "unknown",
+      ipAddress: data.ipAddress || "unknown",
+      shortUrlId: shortUrl.id,
+    },
+  });
+
+  return shortUrl.longUrl;
 }
 
 export default trackShortUrlVisit;
