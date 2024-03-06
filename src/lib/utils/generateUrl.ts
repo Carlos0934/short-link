@@ -14,7 +14,7 @@ function generateUrl({
     result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
 
-  return `${baseUrl}${result}`;
+  return `${baseUrl}/${result}`;
 }
 
 export default generateUrl;

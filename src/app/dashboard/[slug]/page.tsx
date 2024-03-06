@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default async function Page({ params }: { params: { slug: string } }) {
   const prisma = new PrismaClient();
   const url = `${process.env.BASE_URL}/${params.slug}`;
-  console.log(url);
+
   const shortLink = await getShortLinkByShortUrl(url, { prisma });
   if (!shortLink) return redirect("/dashboard");
 
