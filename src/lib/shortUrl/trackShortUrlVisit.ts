@@ -18,7 +18,7 @@ async function trackShortUrlVisit(
     return null;
   }
 
-  prisma.visit.create({
+  await prisma.visit.create({
     data: {
       device: data.device || "unknown",
       browser: data.browser || "unknown",
