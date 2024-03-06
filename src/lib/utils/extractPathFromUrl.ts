@@ -1,5 +1,5 @@
 function extractPathFromUrl(url: string) {
-  return url.split("/").slice(3).join("/");
+  return url.split("/").at(-1);
 }
 
 export default extractPathFromUrl;

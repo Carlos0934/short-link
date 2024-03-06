@@ -19,11 +19,7 @@ const Navbar = () => {
             <Button
               className="bg-gradient-to-tr from-pink-700 to-blue-500 text-white shadow-lg"
               variant="flat"
-              onClick={() =>
-                signIn("github", {
-                  callbackUrl: "http://localhost:3000/dashboard",
-                })
-              }
+              onClick={() => signIn("github")}
             >
               Sign In
             </Button>

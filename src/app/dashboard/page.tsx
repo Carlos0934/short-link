@@ -1,13 +1,20 @@
 import { CopyButton } from "@/components/CopyButton";
 import DashboardHeader from "@/components/DashboardHeader";
 import { authOptions } from "@/lib/configs/nextAuth";
-import findShortUrls from "@/lib/shortUrl/findShortLinks";
+import findShortUrls from "@/lib/shortUrl/findShortUrl";
 
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import extractPathFromUrl from "@/lib/utils/extractPathFromUrl";
+import formatUrl from "@/lib/utils/formatUrl";
+
+export const metadata = {
+  title: "Dashboard",
+  description: "Dashboard",
+};
+
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
 
@@ -40,7 +47,7 @@ export default async function Dashboard() {
                 <p className="">
                   <span className="font-semibold  text-sm  "> URL:</span>
                   <span className="block font-semibold hover:underline text-sm text-gray-400 ">
-                    {link.longUrl}
+                    {formatUrl(link.longUrl)}
                   </span>
                 </p>
                 <p className="mt-2">
@@ -48,7 +55,7 @@ export default async function Dashboard() {
                     Shortened URL:
                   </span>{" "}
                   <span className=" text-sm flex justify-between text-gray-400 ">
-                    {link.shortUrl}
+                    {formatUrl(link.shortUrl)}
 
                     <CopyButton text={link.shortUrl} />
                   </span>

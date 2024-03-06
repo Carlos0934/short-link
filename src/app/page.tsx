@@ -1,13 +1,9 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Input,
-  Link,
-  Snippet,
-} from "@nextui-org/react";
+import { Input, Snippet } from "@nextui-org/react";
 
+export const metadata = {
+  title: "Short Link",
+  description: "A simple URL shortening service",
+};
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col p-24">

@@ -67,8 +67,6 @@ async function getShortUrlAnalytics(id: string): Promise<Analytics> {
     lastsVisits: lastVisits,
   };
 
-  console.log(analytics);
-
   return analytics;
 }
 
