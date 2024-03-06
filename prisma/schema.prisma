@@ -1,0 +1,35 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider     = "mysql"
+    url          = env("DATABASE_URL") // uses connection pooling
+    relationMode = "prisma"
+}
+
+model ShortUrl {
+    userId    String?
+    id        String   @id @default(uuid())
+    longUrl   String
+    shortUrl  String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    visits    Visit[]
+
+    @@index([userId])
+}
+
+model Visit {
+    id         String   @id @default(uuid())
+    shortUrlId String
+    device     String
+    browser    String
+    ipAddress  String
+    country    String
+    createdAt  DateTime @default(now())
+
+    shortUrl ShortUrl @relation(fields: [shortUrlId], references: [id])
+
+    @@index([shortUrlId])
+}
