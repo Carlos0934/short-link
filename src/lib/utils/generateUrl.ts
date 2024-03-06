@@ -1,4 +1,10 @@
-function generateUrl(length: number = 6, baseUrl: string = ""): string {
+function generateUrl({
+  length,
+  baseUrl,
+}: {
+  length: number;
+  baseUrl: string;
+}): string {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

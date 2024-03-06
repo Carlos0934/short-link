@@ -12,7 +12,10 @@ const createShortLink = async (
 ) => {
   while (true) {
     try {
-      const shortUrl = generateUrl();
+      const shortUrl = generateUrl({
+        length: 6,
+        baseUrl: process.env.BASE_URL!,
+      });
       const createdShortUrl = await prisma.shortUrl.create({
         data: {
           longUrl: url,
