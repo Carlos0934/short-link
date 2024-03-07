@@ -24,7 +24,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const id = data.get("id") as string;
     const prisma = new PrismaClient();
     await deleteShortUrl(id, { prisma });
-    console.log("Short link deleted");
 
     redirect("/dashboard");
   };
