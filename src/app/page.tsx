@@ -1,4 +1,4 @@
-import { Input, Snippet } from "@nextui-org/react";
+import { Badge, Snippet } from "@nextui-org/react";
 
 export const metadata = {
   title: "Short Link",
@@ -13,22 +13,16 @@ export default function Home() {
 
       <p className="text-center text-balance text-gray-200">
         This is a simple URL shortening service. You can create a short link to
-        any URL you want to share. Just paste your long URL into the input box
-        and click the button to get a short link.
+        any URL you want to share. use it in your blog, social media, or any
+        other platform.
       </p>
 
       <div className="flex flex-col items-center justify-center mt-8">
-        <Input
-          size="sm"
-          placeholder="Paste your long URL here"
-          className="w-96  "
-          variant="flat"
-          readOnly
-          disabled
-          defaultValue="https://blog.logrocket.com/diving-into-server-actions-next-js-14"
-        />
+        <Badge size="sm" className="w-fit  " variant="flat">
+          https://blog.logrocket.com/diving-into-server-actions-next-js-14
+        </Badge>
         <Snippet symbol="" variant="bordered" className="text-white mt-8">
-          https://short-link.carlos-olivo/link/dsadsadsa
+          https://short-link.carlos-olivo.dev/link/tAGwVe
         </Snippet>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
@@ -37,8 +31,7 @@ export default function Home() {
             Tracking and analytics
           </h3>
           <p className="text-balance text-gray-200">
-            You can track how many people have clicked your short link and where
-            they are from.
+            You can track how many people have clicked your short link.
           </p>
         </div>
 
@@ -46,7 +39,7 @@ export default function Home() {
           <h3 className="text-2xl font-bold mb-4 text-balance ">Low latency</h3>
           <p className="text-balance text-gray-200">
             Your short links will be available anywhere in the world with low
-            latency and high availability thanks to edge locations.
+            latency and high availability.
           </p>
         </div>
 
