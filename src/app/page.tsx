@@ -25,10 +25,10 @@ export default function Home() {
           variant="flat"
           readOnly
           disabled
-          defaultValue="https://www.example.com/very-long-url"
+          defaultValue="https://blog.logrocket.com/diving-into-server-actions-next-js-14"
         />
         <Snippet symbol="" variant="bordered" className="text-white mt-8">
-          https://short.link/
+          https://short-link.carlos-olivo/link/dsadsadsa
         </Snippet>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">

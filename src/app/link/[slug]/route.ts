@@ -29,6 +29,7 @@ export const GET = async (req: Request) => {
 
     return Response.redirect(longUrl, 302);
   } catch (error) {
+    console.error(error);
     return new Response("Internal Server Error", { status: 500 });
   } finally {
     await prisma.$disconnect();

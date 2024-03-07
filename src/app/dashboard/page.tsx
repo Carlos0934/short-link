@@ -40,27 +40,30 @@ export default async function Dashboard() {
           {data.map((link) => (
             <li
               key={link.id}
-              className="flex flex-col cursor-pointer hover:bg-gray-800 transition-all 
+              className="flex flex-col  hover:bg-gray-800 transition-all 
               justify-between p-4 border border-gray-600  rounded-md"
             >
-              <Link href={`/dashboard/${extractPathFromUrl(link.shortUrl)}`}>
-                <p className="">
-                  <span className="font-semibold  text-sm  "> URL:</span>
+              <p>
+                <span className="font-semibold cursor-pointer  text-sm  ">
+                  {" "}
+                  URL:
+                </span>
+                <Link href={`/dashboard/${extractPathFromUrl(link.shortUrl)}`}>
                   <span className="block font-semibold hover:underline text-sm text-gray-400 ">
                     {formatUrl(link.longUrl)}
                   </span>
-                </p>
-                <p className="mt-2">
-                  <span className="block text-sm font-semibold text-gray-500 mt-2">
-                    Shortened URL:
-                  </span>{" "}
-                  <span className=" text-sm flex justify-between text-gray-400 ">
-                    {formatUrl(link.shortUrl)}
+                </Link>
+              </p>
+              <p className="mt-2">
+                <span className="block text-sm font-semibold text-gray-500 mt-2">
+                  Shortened URL:
+                </span>{" "}
+                <span className=" text-sm flex justify-between text-gray-400 ">
+                  {formatUrl(link.shortUrl)}
 
-                    <CopyButton text={link.shortUrl} />
-                  </span>
-                </p>
-              </Link>
+                  <CopyButton text={link.shortUrl} />
+                </span>
+              </p>
             </li>
           ))}
         </ul>

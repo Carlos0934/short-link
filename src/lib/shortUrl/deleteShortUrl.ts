@@ -4,18 +4,8 @@ async function deleteShortUrl(
   shortUrlId: string,
   { prisma }: { prisma: PrismaClient }
 ) {
-  await prisma.$transaction([
-    prisma.shortUrl.delete({
-      where: {
-        id: shortUrlId,
-      },
-    }),
-    prisma.visit.deleteMany({
-      where: {
-        shortUrlId,
-      },
-    }),
-  ]);
+  await prisma.visit.deleteMany({ where: { shortUrlId } });
+  await prisma.shortUrl.delete({ where: { id: shortUrlId } });
 }
 
 export default deleteShortUrl;

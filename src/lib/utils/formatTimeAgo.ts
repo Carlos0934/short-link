@@ -4,7 +4,6 @@ const TIME_UNITS = {
   day: 86400,
   hour: 3600,
   minute: 60,
-  second: 1,
 };
 
 function formatTimeAgo(date: Date) {

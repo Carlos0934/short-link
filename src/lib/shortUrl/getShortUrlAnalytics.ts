@@ -1,70 +1,25 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Visit } from "@prisma/client";
 import { Analytics } from "../types";
 
-async function getShortUrlAnalytics(id: string): Promise<Analytics> {
-  const prisma = new PrismaClient();
-
-  const visitsByCountry = (
-    await prisma.visit.groupBy({
-      by: ["country"],
-      where: {
-        shortUrlId: id,
-      },
-
-      _count: true,
-    })
-  ).reduce((acc, visit) => {
-    return {
-      ...acc,
-      [visit.country]: visit._count,
-    };
-  }, {});
-
-  const visitsByBrowser = (
-    await prisma.visit.groupBy({
-      by: ["browser"],
-      where: {
-        shortUrlId: id,
-      },
-      _count: true,
-    })
-  ).reduce((acc, visit) => {
-    return {
-      ...acc,
-      [visit.browser]: visit._count,
-    };
-  }, {});
-
-  const visitsByDevice = (
-    await prisma.visit.groupBy({
-      by: ["device"],
-      where: {
-        shortUrlId: id,
-      },
-      _count: true,
-    })
-  ).reduce((acc, visit) => {
-    return {
-      ...acc,
-      [visit.device]: visit._count,
-    };
-  }, {});
-
-  const lastVisits = await prisma.visit.findMany({
-    where: {
-      shortUrlId: id,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 10,
-  });
+type CountResult = {
+  count: number;
+}[];
+async function getShortUrlAnalytics(
+  id: string,
+  { prisma }: { prisma: PrismaClient }
+): Promise<Analytics> {
+  const [totalUniqueVisits, totalClicks, lastsVisits] = await Promise.all([
+    prisma.$queryRaw<CountResult>`SELECT COUNT(DISTINCT ipAddress) count FROM Visit WHERE shortUrlId = ${id}`,
+    prisma.$queryRaw<CountResult>`SELECT COUNT(*) count FROM Visit WHERE shortUrlId = ${id}`,
+    prisma.$queryRaw<
+      Visit[]
+    >`SELECT * FROM Visit WHERE shortUrlId = ${id} ORDER BY "createdAt" DESC LIMIT 10`,
+  ]);
 
   const analytics: Analytics = {
-    countries: visitsByCountry,
-    browsers: visitsByBrowser,
-    devices: visitsByDevice,
-    lastsVisits: lastVisits,
+    totalUniqueVisits: Number(totalUniqueVisits[0].count),
+    totalClicks: Number(totalClicks[0].count),
+    lastsVisits: lastsVisits,
   };
 
   return analytics;
