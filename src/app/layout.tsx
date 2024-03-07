@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="relative max-h-screen overflow-hidden">
+      <body>
         <main
           className={`dark text-foreground bg-background ${inter.className}`}
         >
@@ -27,6 +27,10 @@ export default function RootLayout({
             {children}
           </Providers>
         </main>
+        <div
+          id="snackbar"
+          className="fixed  opacity-0  p-2 text-xs font-bold text-white bg-black rounded transition-all duration-500 ease-in-out  z-50 bottom-4 left-2/4"
+        ></div>
       </body>
     </html>
   );

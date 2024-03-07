@@ -49,7 +49,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </div>
 
       <section className="mt-4  bg-gray-800 p-4 rounded-lg">
-        <header className="flex gap-16 mt-4 border-b border-gray-700 pb-4">
+        <header className="flex flex-col sm:flex-row gap-16 mt-4 border-b border-gray-700 pb-4">
           <div className="flex-1">
             <p>
               <span className="font-semibold text-lg text-gray-500">

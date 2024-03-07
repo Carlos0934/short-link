@@ -30,7 +30,7 @@ export default async function Dashboard() {
       <section className="mt-4 ml-2 max-w-screen-lg">
         <DashboardHeader />
 
-        <ul className="mt-8 grid grid-cols-3  gap-4 ">
+        <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 ">
           {data.length === 0 && (
             <div className="flex items-center col-span-3 justify-center text-gray-400">
               <p className="text-xl font-semibold">No links yet</p>
@@ -45,11 +45,10 @@ export default async function Dashboard() {
             >
               <p>
                 <span className="font-semibold cursor-pointer  text-sm  ">
-                  {" "}
                   URL:
                 </span>
                 <Link href={`/dashboard/${extractPathFromUrl(link.shortUrl)}`}>
-                  <span className="block font-semibold hover:underline text-sm text-gray-400 ">
+                  <span className="block font-semibold hover:underline text-sm text-gray-400 truncate">
                     {formatUrl(link.longUrl)}
                   </span>
                 </Link>

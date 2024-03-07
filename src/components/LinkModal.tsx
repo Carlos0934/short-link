@@ -58,6 +58,7 @@ export default function LinkModal({ isOpen, onOpenChange }: LinkModalProps) {
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       onClose={onClose}
+      placement="center"
     >
       <ModalContent className="bg-gray-800">
         {(onClose) => (
