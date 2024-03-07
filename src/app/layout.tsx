@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className="relative max-h-screen overflow-hidden">
         <main
           className={`dark text-foreground bg-background ${inter.className}`}
         >
